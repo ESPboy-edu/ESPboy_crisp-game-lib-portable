@@ -1,5 +1,4 @@
 #include "menu.h"
-
 #include "cglp.h"
 
 #define MAX_GAME_COUNT 16
@@ -9,8 +8,11 @@ static int gameIndex = 1;
 
 static void update() {
   color = BLACK;
-  text("[A]Select[B]Down", 3, 3);
-  if (input.b.isJustPressed || input.down.isJustPressed) {
+  text("[A]Select[B]Sound", 1, 2);
+  if (currentInput.b.isJustPressed) {
+      toggleSound();
+  }
+  if (/*input.b.isJustPressed || */input.down.isJustPressed) {
     gameIndex++;
   }
   if (input.up.isJustPressed) {
@@ -21,10 +23,10 @@ static void update() {
     color = BLACK;
     float y = i * 6;
     if (i == gameIndex) {
-      rect(0, y, 100, 6);
+      rect(0, y+2, 100, 5);
       color = WHITE;
     }
-    text(games[i].title, 3, y + 3);
+    text(games[i].title, 3, y + 4);
   }
   if (input.a.isJustPressed) {
     restartGame(gameIndex);

@@ -22,6 +22,8 @@ Minimal C-lang library for creating classic arcade-like mini-games running on de
 
 - [ESP32-2432S028R](https://ja.aliexpress.com/item/1005004502250619.html)
 
+- [ESPboy](https://www.espboy.com/)
+
 - Browser
   - [Play sample games](https://abagames.github.io/crisp-game-lib-portable/build/)
 
@@ -100,6 +102,10 @@ Note: Some features are limited due to device resource limitations.
 ### ESP32-2432S028R
 
 - [cglp-dentaroUI](https://github.com/dentaro/cglp-dentaroUI) (ported by [dentaro](https://github.com/dentaro))
+
+### ESPboy
+
+- [cglpESPboy](https://github.com/ESPboy-edu/ESPboy_crisp-game-lib-portable/tree/main/cglpESPboy) (ported by [ESPboy](https://github.com/ESPboy-edu))
 
 ### Browser
 

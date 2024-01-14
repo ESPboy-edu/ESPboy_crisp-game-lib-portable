@@ -143,8 +143,10 @@ static void updateFromSoundTask() {
 
 
 void setup() {
-  Serial.begin(115200);
-  myESPboy.begin("crisp-game-lib");
+  //Serial.begin(115200);
+  myESPboy.begin("crisp-game-lib v1.0");
+  //Serial.println();
+  //Serial.println(ESP.getFreeHeap());
   initSoundTones();
   disableSound();
   initGame();
