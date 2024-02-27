@@ -8,6 +8,7 @@ void addGameReflector();
 void addGameFroooog();
 void addGameRWheel();
 void addGameLadderDrop();
+void addGamePakuPaku();
 
 void addGames() {
   addGameThunder();
@@ -20,4 +21,5 @@ void addGames() {
   addGameFroooog();
   addGameRWheel();
   addGameLadderDrop();
+  addGamePakuPaku();
 }

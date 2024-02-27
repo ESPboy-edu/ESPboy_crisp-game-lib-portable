@@ -1,7 +1,7 @@
 #include "cglp.h"
 
-static char *title = "REFLECTOR";
-static char *description = "[Tap]\n Turn\n[Hold]\n Enforce\n reflector";
+static char PROGMEM *title = "REFLECTOR";
+static char PROGMEM *description = "[Tap]\n Turn\n[Hold]\n Enforce\n reflector";
 
 #define CS static PROGMEM char characters[][CHARACTER_HEIGHT][CHARACTER_WIDTH + 1]
 CS = {{
@@ -47,7 +47,9 @@ typedef struct {
   float angle;
   float power;
 } Ufo;
+
 static Ufo ufo;
+
 typedef struct {
   Vector pos;
   float vx;
@@ -59,18 +61,22 @@ typedef struct {
   float fireSpeed;
   bool isAlive;
 } Tank;
+
 #define REFLECTOR_MAX_TANK_COUNT 32
 static Tank tanks[REFLECTOR_MAX_TANK_COUNT];
 static int tankIndex;
 static float nextTankTicks;
+
 typedef struct {
   Vector pos;
   Vector vel;
   bool isAlive;
 } Bullet;
+
 #define REFLECTOR_MAX_BULLET_COUNT 32
 static Bullet bullets[REFLECTOR_MAX_BULLET_COUNT];
 static int bulletIndex;
+
 typedef struct {
   Vector pos;
   float radius;
@@ -78,6 +84,7 @@ typedef struct {
   float duration;
   bool isAlive;
 } Explosion;
+
 #define REFLECTOR_MAX_EXPLOSION_COUNT 8
 static Explosion explosions[REFLECTOR_MAX_EXPLOSION_COUNT];
 static int explosionIndex;

@@ -1,7 +1,7 @@
 #include "cglp.h"
 
-static char *title = "FROOOOG";
-static char *description = "[Hold]    Bend\n[Release] Jump";
+static char PROGMEM *title = "FROOOOG";
+static char PROGMEM *description = "[Hold]    Bend\n[Release] Jump";
 
 #define CS static PROGMEM char characters[][CHARACTER_HEIGHT][CHARACTER_WIDTH + 1]
 CS = {{
@@ -17,19 +17,23 @@ static int charactersCount = 1;
 static Options options = {
     .viewSizeX = 100, .viewSizeY = 100, .soundSeed = 4, .isDarkColor = false};
 
+#pragma pack(push,1)
 typedef struct {
   float y;
   float vx;
   float width;
-  int color;
+  int8_t color;
   float interval;
   float ticks;
   bool isAlive;
 } Lane;
+#pragma pack(pop)
+
 #define FROOOOG_MAX_LANE_COUNT 16
 static Lane lanes[FROOOOG_MAX_LANE_COUNT];
 static int laneIndex;
 static int nextEmptyLaneCount;
+
 typedef struct {
   Vector pos;
   float vx;
@@ -37,18 +41,22 @@ typedef struct {
   int color;
   bool isAlive;
 } Car;
+
 #define FROOOOG_MAX_CAR_COUNT 32
 static Car cars[FROOOOG_MAX_CAR_COUNT];
 static int carIndex;
 static float nextLaneY;
+
+#pragma pack(push,1)
 typedef struct {
   float y;
   float py;
   float targetY;
   bool isSafe;
-  int state;
+  int8_t state;
 } Frog;
 static Frog frog;
+#pragma pack(pop)
 
 static void addLane(bool isEmpty) {
   nextEmptyLaneCount--;

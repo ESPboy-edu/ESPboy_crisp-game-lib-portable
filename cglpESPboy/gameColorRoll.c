@@ -1,7 +1,7 @@
 #include "cglp.h"
 
-static char *title = "COLOR ROLL";
-static char *description = "[Tap] Shoot";
+static char PROGMEM *title = "COLOR ROLL";
+static char PROGMEM *description = "[Tap] Shoot";
 
 #define CS static PROGMEM char characters[][CHARACTER_HEIGHT][CHARACTER_WIDTH + 1]
 CS = {{
@@ -17,18 +17,23 @@ static int charactersCount = 1;
 static Options options = {
     .viewSizeX = 100, .viewSizeY = 100, .soundSeed = 5, .isDarkColor = false};
 
+#pragma pack(push,1)
 typedef struct {
   float width;
   int color;
 } Bar;
+#pragma pack(pop)
 
+#pragma pack(push,1)
 typedef struct {
   float x;
   float y;
   float vx;
   Bar bars[8];
-  int barCount;
+  uint8_t barCount;
 } Lane;
+#pragma pack(pop)
+
 #define COLOR_ROLL_MAX_LANE_COUNT 32
 static Lane lanes[COLOR_ROLL_MAX_LANE_COUNT];
 static int laneIndex;
@@ -39,8 +44,9 @@ static int laneCount;
 static int baseMultiplier;
 static int multiplier;
 static float penalty;
+
 #define COLOR_ROLL_BAR_COLOR_COUNT 4
-static int barColors[COLOR_ROLL_BAR_COLOR_COUNT] = {RED, GREEN, BLUE, YELLOW};
+static int8_t barColors[COLOR_ROLL_BAR_COLOR_COUNT] = {RED, GREEN, BLUE, YELLOW};
 static float laneHeight = 7;
 
 static int addBars(Bar bars[], Bar prevBars[], int prevBarsCount) {

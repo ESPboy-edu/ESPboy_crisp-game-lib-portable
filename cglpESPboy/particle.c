@@ -9,7 +9,7 @@ typedef struct {
   Vector pos;
   Vector vel;
   int ticks;
-  int colorIndex;
+  char colorIndex;
 } Particle;
 
 #define MAX_PARTICLE_COUNT 32//64

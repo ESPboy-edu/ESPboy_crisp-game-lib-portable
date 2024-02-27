@@ -1,7 +1,7 @@
 #include "cglp.h"
 
-static char *title = "LADDER DROP";
-static char *description = "[Tap] Drop";
+static char PROGMEM *title = "LADDER DROP";
+static char PROGMEM *description = "[Tap] Drop";
 
 #define CS static PROGMEM char characters[][CHARACTER_HEIGHT][CHARACTER_WIDTH + 1]
 CS = {{
@@ -90,23 +90,29 @@ typedef struct {
   bool hasCoin;
   bool isAlive;
 } Panel;
+
 #define LADDER_DROP_MAX_PANEL_COUNT 32
 static Panel panels[LADDER_DROP_MAX_PANEL_COUNT];
 static int panelIndex;
 static float pvx;
 static float nextPanelX;
 static int coinPanelCount;
+
 typedef struct {
   Vector pos;
   int vx;
-  int state;
+  int8_t state;
 } Player;
+
 static Player player;
 static int lockCount;
+
 typedef struct {
   Vector pos;
   bool isAlive;
 } Coin;
+
+
 #define LADDER_DROP_MAX_COIN_COUNT 32
 static Coin coins[LADDER_DROP_MAX_COIN_COUNT];
 static int coinIndex;

@@ -1,7 +1,7 @@
 #include "cglp.h"
 
-static char *title = "BALL TOUR";
-static char *description = "[Hold]\n Move forward";
+static char PROGMEM *title = "BALL TOUR";
+static char PROGMEM *description = "[Hold]\n Move forward";
 
 #define CS static PROGMEM char characters[][CHARACTER_HEIGHT][CHARACTER_WIDTH + 1]
 CS = {{
@@ -40,21 +40,30 @@ typedef struct {
   float ticks;
   bool isAlive;
 } Player;
+
 static Player player;
+
+#pragma pack(push,1)
 typedef struct {
   Vector pos;
   float vy;
   bool isAlive;
 } Spike;
+#pragma pack(pop)
+
 #define BALL_TOUR_MAX_SPIKE_COUNT 32
+
 static Spike spikes[BALL_TOUR_MAX_SPIKE_COUNT];
 static int spikeIndex;
 static float nextSpikeDist;
+
 typedef struct {
   Vector pos;
   bool isAlive;
 } Ball;
+
 #define BALL_TOUR_MAX_BALL_COUNT 16
+
 static Ball balls[BALL_TOUR_MAX_BALL_COUNT];
 static int ballIndex;
 static float nextBallDist;

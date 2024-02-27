@@ -78,9 +78,9 @@ static void (*update)(void);
 // Collision
 /// \cond
 typedef struct {
-  int rectIndex;
-  int textIndex;
-  int characterIndex;
+  int8_t rectIndex;
+  int8_t textIndex;
+  int8_t characterIndex;
   Vector pos;
   Vector size;
 } HitBox;
@@ -333,7 +333,6 @@ Collision arc(float centerX, float centerY, float radius, float angleFrom,
 typedef struct {
   unsigned char grid[CHARACTER_HEIGHT][CHARACTER_WIDTH][3];
   HitBox hitBox;
-  int hash;
 } CharacterPattern;
 /// \endcond
 
@@ -407,13 +406,6 @@ static void setColorGrid(
             clamp(rightBottom.y - leftTop.y + 1, 0, CHARACTER_HEIGHT));
 }
 
-static int getHashFromIntegers(int *values, int count) {
-  int hash = 23;
-  for (int i = 0; i < count; i++) {
-    hash = hash * 37 + values[i];
-  }
-  return hash;
-}
 
 static bool isShownTooManyCharacterPatternsMessage = false;
 
@@ -428,7 +420,7 @@ static void drawCharacter(int index, float x, float y, bool _hasCollision, bool 
    
   if (color > TRANSPARENT && x > -CHARACTER_WIDTH && x < viewSizeX &&
       y > -CHARACTER_HEIGHT && y < viewSizeY) {
-    md_drawCharacter(cp.grid, x, y, 0);
+    md_drawCharacter(cp.grid, x, y);
   }
   if (hasCollision && _hasCollision) {
     HitBox *thb = &cp.hitBox;
@@ -711,7 +703,7 @@ void setButtonState(bool left, bool right, bool up, bool down, bool b, bool a) {
 static void updateInput() { input = currentInput; }
 
 /// \cond
-#define MAX_RECORDED_INPUT_COUNT 100//5120
+#define MAX_RECORDED_INPUT_COUNT 500//5120
 /// \endcond
 static uint32_t replayRandomSeed;
 static uint8_t recordedInputs[MAX_RECORDED_INPUT_COUNT];

@@ -1,7 +1,7 @@
 #include "cglp.h"
 
-static char *title = "PIN CLIMB";
-static char *description = "[Hold] Stretch";
+static char PROGMEM *title = "PIN CLIMB";
+static char PROGMEM *description = "[Hold] Stretch";
 
 #define CS static PROGMEM char characters[][CHARACTER_HEIGHT][CHARACTER_WIDTH + 1]
 CS = {{
@@ -21,11 +21,15 @@ typedef struct {
   Vector pos;
   bool isAlive;
 } Pin;
+
+#pragma pack(push,1)
 typedef struct {
   float angle;
   float length;
   Pin *pin;
 } Cord;
+#pragma pack(pop)
+
 static Cord cord;
 #define PIN_CLIMB_MAX_PIN_COUNT 32
 static Pin pins[PIN_CLIMB_MAX_PIN_COUNT];

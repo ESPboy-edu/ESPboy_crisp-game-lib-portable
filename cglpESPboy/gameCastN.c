@@ -1,7 +1,7 @@
 #include "cglp.h"
 
-static char *title = "CAST N";
-static char *description =
+static char PROGMEM *title = "CAST N";
+static char PROGMEM *description =
     "[Hold]    Select power\n[Release] Cast\n[Tap]     Pull";
 
 #define CS static PROGMEM char characters[][CHARACTER_HEIGHT][CHARACTER_WIDTH + 1]
@@ -41,17 +41,21 @@ typedef struct _Node {
   Vector vel;
   struct _Node *nextNode;
 } Node;
+
 #define CAST_N_NODES_COUNT 20
 static Node nodes[CAST_N_NODES_COUNT];
 // 0:ready, 1:angle, 2:throw, 3:pull
+
 static int nodeState;
 static float throwPower;
+
 typedef struct {
   Vector pos;
   Vector vel;
   int type;
   bool isAlive;
 } Fish;
+
 #define CAST_N_MAX_FISH_COUNT 80
 static Fish fishes[CAST_N_MAX_FISH_COUNT];
 static int fishIndex;

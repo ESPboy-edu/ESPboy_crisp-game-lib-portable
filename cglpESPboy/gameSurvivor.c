@@ -1,7 +1,7 @@
 #include "cglp.h"
 
-static char *title = "SURVIVOR";
-static char *description = "[Tap] Jump";
+static char PROGMEM *title = "SURVIVOR";
+static char PROGMEM *description = "[Tap] Jump";
 
 #define CS static PROGMEM char characters[][CHARACTER_HEIGHT][CHARACTER_WIDTH + 1]
 CS = {{

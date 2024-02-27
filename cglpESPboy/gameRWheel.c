@@ -1,7 +1,7 @@
 #include "cglp.h"
 
-static char *title = "R WHEEL";
-static char *description = "[Tap]\n Multiple jumps";
+static char PROGMEM *title = "R WHEEL";
+static char PROGMEM *description = "[Tap]\n Multiple jumps";
 
 #define CS static char PROGMEM characters[][CHARACTER_HEIGHT][CHARACTER_WIDTH + 1]
 CS = {{
@@ -37,28 +37,39 @@ typedef struct {
   int height;
   bool isHit;
 } Spike;
+
 #define RWHEEL_SPIKE_COUNT 32
 static Spike spikes[RWHEEL_SPIKE_COUNT];
 float angleOfs;
+
+#pragma pack(push,1)
 typedef struct {
   float angle;
   float radius;
   bool isAlive;
 } Bonus;
+#pragma pack(pop)
+
 #define RWHEEL_MAX_BONUS_COUNT 8
 static Bonus bonuses[RWHEEL_MAX_BONUS_COUNT];
 static int bonusIndex;
+
+#pragma pack(push,1)
 typedef struct {
   float y;
   float vy;
 } Player;
+#pragma pack(pop)
+
 static Player player;
+
 typedef struct {
   Vector pos;
   float width;
   bool isSpike;
   bool isAlive;
 } Bar;
+
 #define RWHEEL_MAX_BAR_COUNT 8
 static Bar bars[RWHEEL_MAX_BAR_COUNT];
 static int barIndex;

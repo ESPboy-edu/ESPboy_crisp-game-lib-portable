@@ -22,8 +22,8 @@ typedef struct {
   float when;
 } SoundTone;
 
-#define TONE_PER_NOTE 32
-#define SOUND_TONE_COUNT 64
+#define TONE_PER_NOTE 16
+#define SOUND_TONE_COUNT 32
 static SoundTone soundTones[SOUND_TONE_COUNT];
 static int soundToneIndex = 0;
 static float soundTime = 0;
@@ -50,7 +50,7 @@ void md_drawRect(float x, float y, float w, float h, unsigned char r, unsigned c
 }
 
 
-void md_drawCharacter(unsigned char grid[CHARACTER_HEIGHT][CHARACTER_WIDTH][3], float x, float y, int hash) {
+void md_drawCharacter(unsigned char grid[CHARACTER_HEIGHT][CHARACTER_WIDTH][3], float x, float y) {
   static uint16_t characterImageData[CHARACTER_WIDTH * CHARACTER_HEIGHT];
   int cp = 0;
   for (int y = 0; y < CHARACTER_HEIGHT; y++) {
@@ -144,15 +144,19 @@ static void updateFromSoundTask() {
 
 void setup() {
   //Serial.begin(115200);
-  myESPboy.begin("crisp-game-lib v1.0");
+  myESPboy.begin("crisp-game-lib v1.1");
   //Serial.println();
   //Serial.println(ESP.getFreeHeap());
   initSoundTones();
-  disableSound();
+  enableSound();
+  //disableSound();
   initGame();
 
   updateFrameTick.attach_ms(1000/FPS, updateFromFrameTask);
-  updateSoundTick.attach_ms(1000/(tempo / 60.0f * TONE_PER_NOTE), updateFromSoundTask);  
+  updateSoundTick.attach_ms(1000/(tempo * TONE_PER_NOTE / 50.0f), updateFromSoundTask);  
 }
 
-void loop() { delay(1000);}
+void loop() { 
+  delay(1000); 
+  //Serial.println(ESP.getFreeHeap());
+}

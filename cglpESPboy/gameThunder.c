@@ -1,7 +1,7 @@
 #include "cglp.h"
 
-static char *title = "THUNDER";
-static char *description = "[Tap] Turn";
+static char PROGMEM *title = "THUNDER";
+static char PROGMEM *description = "[Tap] Turn";
 
 #define CS static PROGMEM char characters[][CHARACTER_HEIGHT][CHARACTER_WIDTH + 1]
 CS = {{
@@ -42,22 +42,29 @@ typedef struct _Line {
   bool isActive;
   bool isAlive;
 } Line;
+
 #define THUNDER_MAX_LINE_COUNT 128
 static Line lines[THUNDER_MAX_LINE_COUNT];
 static int lineIndex;
 static int activeTicks;
+
 typedef struct {
   Vector pos;
   float vy;
   bool isAlive;
 } Star;
+
 #define THUNDER_MAX_STAR_COUNT 32
 static Star stars[THUNDER_MAX_STAR_COUNT];
 static int starIndex;
+
+#pragma pack(push,1)
 typedef struct {
   float x;
   float vx;
 } Player;
+#pragma pack(pop)
+
 static Player player;
 static int multiplier;
 
